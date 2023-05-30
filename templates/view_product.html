@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block css %} 
+<style>
+.brand-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.box{
+
+    align-items: center;
+    align-items: center;
+    background-color: navy;
+    border: 4px solid #f6dd85 ;
+    border-radius: 20px;
+    margin: 30px;
+    padding: 20px;
+}
+.img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 20px;
+
+}
+.btn{
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    font-weight: bold;
+    color: #000000;
+    background-color: #e1d197;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    letter-spacing: 3px;
+    border-radius: 15px;
+}
+
+.btn:hover {
+    background: #f6dd85;
+    color: #272727;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.search-bar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .search{
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    font-weight: bold;
+    color: #000000;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    letter-spacing: 3px;
+    border-radius: 15px;
+  }
+  @media only screen and (max-width: 488px){
+    .box{
+        margin: 20px;
+        padding: 15px;
+    }
+  }
+</style>
+{% endblock css %}
+
+{% block body %}
+<div class="search-bar">
+    <h1 style="color:#000000; text-align:center; padding:20px;">Welcome {{user}}</h1>
+    <h1 style="color:#000000; text-align:center; padding:20px;">Search Brand</h1>
+    
+    <form>
+        {% csrf_token %}
+        <input type="search" onkeyup="search_brand()" id='search' name="search" placeholder="Search..." class="search" aria-label="Search">
+    </form>
+
+<div class="brand-box">
+{% for brand in brands %}
+<div class="box">
+    <img class="img" src="{{brand.brand_photo.url}}" alt=""> 
+    <div>
+        <h1 style="color: #cbbe82;">{{brand.brand_name}}</h1>
+
+        {% if brand.availability %}
+        <a href="{% url 'view_watches' brand.id %}"><button class="btn">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            View Watches
+        </button></a>
+        {% else %}
+        <h3 style="color:Red;">Not Available</h3>
+
+        {% endif %}
+        
+    </div>
+</div>
+{% endfor %}
+</div>
+
+{% endblock body %}
+{% block js %}
+<script>
+    function search_brand() {
+      let input = document.getElementById('search').value
+      input=input.toLowerCase();
+      let x = document.getElementsByClassName('box');
+      console.log("Done")
+      
+      for (i = 0; i < x.length; i++) {
+          if (!x[i].innerHTML.toLowerCase().includes(input)) {
+              x[i].style.display="none";
+          }
+          else {
+              x[i].style.display="list-item";				
+          }
+      }
+  }
+  </script>
+  {% endblock js %}

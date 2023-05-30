@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <style>
+        .main-sec{
+            color: white;
+            background-image: url('static/section-img.png');
+            opacity: 1;
+            height: 40rem;
+            background-repeat:round;
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.4);
+            background-blend-mode: multiply;
+
+        }
+        .text h1{
+            margin: 0px;
+            font-size: 6rem;
+        }
+        .text h3{
+            font-size: 2rem;
+        }
+        .text{
+            margin-left: 20px;
+        }
+        .btn{
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            font-weight: bold;
+            color: #000000;
+            background-color: #ffed9b;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 40px;
+            letter-spacing: 3px;
+            border-radius: 15px;
+        }
+    
+        .btn:hover {
+            background: #f6dd85;
+            color: #272727;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .service{
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            
+
+        }
+        .box{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content:center;
+            background-color: rgb(37, 37, 125);
+            border: 4px solid #f6dd85 ;
+            border-radius: 20px;
+            margin: 30px;
+            padding: 20px;
+            text-align:center;
+            width: fit-content;
+        }
+        .service-img{
+            height: 200px;
+            border-radius: 20px;
+
+        }
+        p{
+            width: 41vh;
+        }
+        @media only screen and (max-width: 488px) {
+            .text h1{
+                font-size: 3rem;
+            }
+            .text h3{
+                font-size: 1.3rem;
+            }
+            .box{
+                margin: 20px;
+                padding: 10px;
+            }
+            .main-sec{
+                height: 30rem;
+            }
+        }
+    </style>
+{% endblock css %}
+
+{% block body %}
+    <section class="main-sec">
+        <div class="text">
+            <h1 style="font-size: 3rem;">Welcome to</h1>
+            <h1 style="color: #ffed9b;"><b>Arora Watches</b></h1>
+            <h3>Timeless Style for the Modern You</h3>
+            <a href="/viewproduct"><button class="btn">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                View Products
+            </button></a>
+        </div>
+    </section>
+
+    <h1 style="color:#000000; text-align:center; padding:20px;">Services</h1>
+    <section class="service">
+        <div class="box">
+            <img class="service-img" src="static/service-img.avif" alt=""> 
+            <h1 style="color: #cbbe82;">Watch Adjustment</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vero libero quis voluptas impedit repellendus culpa asperiores unde rem vel.</p>
+        </div>
+        <div class="box">
+            <img class="service-img" src="static/service-img2.avif" alt=""> 
+            <h1 style="color: #cbbe82;">After Sale Services</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vero libero quis voluptas impedit repellendus culpa asperiores unde rem vel.</p>
+        </div>
+        <div class="box">
+            <img class="service-img" src="static/service-img3.avif" alt=""> 
+            <h1 style="color: #cbbe82;">On Time Delivery</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vero libero quis voluptas impedit repellendus culpa asperiores unde rem vel.</p>
+        </div>
+    </section>
+
+{% endblock body %}

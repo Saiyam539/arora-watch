@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block css %} 
+<style>
+    body{
+        color:white;
+    }
+.btn{
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    font-weight: bold;
+    color: #000000;
+    background-color: #e1d197;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    letter-spacing: 3px;
+    border-radius: 15px;
+}
+
+.btn:hover {
+    background: #f6dd85;
+    color: #272727;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+
+.watch-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+  }
+  
+  .watch {
+    align-items: center;
+    background-color: rgb(37, 37, 125);
+    border: 4px solid #f6dd85 ;
+    border-radius: 20px;
+    margin: 30px;
+    padding: 30px;
+  }
+  
+  .watch img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 20px;
+  }
+  
+  .watch h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .watch p {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .search-bar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .search{
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    font-weight: bold;
+    color: #000000;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    letter-spacing: 3px;
+    border-radius: 15px;
+  }
+  @media only screen and (max-width: 488px){
+    .watch{
+        margin: 20px;
+        padding: 15px;
+    }
+  }
+</style>
+{% endblock css %}
+
+{% block body %}
+<div class="search-bar">
+<h1 style="color:#000000; text-align:center; padding:20px;">Search Watch</h1>
+
+<form>
+  {% csrf_token %}
+  <input type="search" onkeyup="search_watch()" id='search' name="search" placeholder="Search..." class="search" aria-label="Search">
+</form>
+</div>
+
+<div class="watch-container">
+      {% for watch in watches %}
+        <div class="watch">
+          <a href="{{watch.watch_photo.url}}"><img src="{{ watch.watch_photo.url }}" alt="Watch Image"></a>
+          <h2 style="color:white;">{{ watch.watch_name }}</h2>
+          <h3>Price: {{ watch.watch_price }} Rs</h3>
+          {% if brand.availability %}
+          {% if brand.availability %}
+          <a href="{% url 'view_watches' brand.id %}"><button class="btn">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              Add to cart
+          </button></a>
+          {% else %}
+          <h3 style="color:Red;">Not Available</h3>
+    
+          {% endif %}
+          {% else %}
+          <h3 style="color:Red;">Not Available</h3>
+    
+          {% endif %}
+        </div>
+      {% endfor %}
+  </div>
+
+{% endblock body %}
+{% block js %}
+<script>
+    function search_watch() {
+      let input = document.getElementById('search').value
+      input=input.toLowerCase();
+      let x = document.getElementsByClassName('watch');
+      console.log("Done")
+      
+      for (i = 0; i < x.length; i++) {
+          if (!x[i].innerHTML.toLowerCase().includes(input)) {
+              x[i].style.display="none";
+          }
+          else {
+              x[i].style.display="list-item";				
+          }
+      }
+  }
+  </script>
+  {% endblock js %}
